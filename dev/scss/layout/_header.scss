@@ -1,0 +1,38 @@
+@mixin bp($point) {
+  
+    $small: "(min-width: 767px)";
+    $medium: "(min-width: 992px)";
+    $large: "(min-width: 1200px)";
+    $laptop: "(min-width: 1400px)";
+    $xl: "(min-width: 1800px)";
+  
+    @if $point == small {
+      @media #{$small} { @content; }
+    }
+    @else if $point == medium {
+      @media #{$medium} { @content; }
+    }
+    @else if $point == large {
+      @media #{$large}  { @content; }
+    }
+    @else if $point == laptop {
+      @media #{$laptop}  { @content; }
+    }
+    @else if $point == xl {
+      @media #{$xl}  { @content; }
+    }
+  
+  }
+
+.header-container {
+    background-color: red;
+    @include bp(medium) {
+    background-color: blue;
+    }
+
+    .wrapper {
+        h1 {
+            text-align: center;
+        }
+    }
+} 

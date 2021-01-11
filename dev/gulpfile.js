@@ -9,6 +9,8 @@ const rename = require("gulp-rename");
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
 const scsslint = require('gulp-scss-lint');
+const minifycss = require('gulp-minify-css');
+
 
 /**
  * Asset paths.
@@ -28,11 +30,13 @@ gulp.task('scss-lint', function() {
 /**
  * SCSS task
  */
+// updated to convert SCSS to CSS
 gulp.task('css', ['scss-lint'], function () {
     return gulp.src('scss/**/*.scss.liquid')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({style: 'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer({ cascade : false }))
-        .pipe(rename('theme.scss.liquid'))
+        .pipe(minifycss())
+        .pipe(rename('theme.min.css'))
         .pipe(gulp.dest(assetsDir));
 });
 
